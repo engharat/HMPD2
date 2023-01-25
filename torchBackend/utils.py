@@ -20,12 +20,19 @@ def getTransformer(transform_resize, transform_crop, transform_normalize_mean, t
 
 def generateModel(desired_model, num_classes):
 
-    if desired_model == 'models.alexnet()':
+    if desired_model == 'alexNet':
         model = models.alexnet()
         model.classifier[6] = nn.Linear(4096, num_classes)
 
-    if desired_model == 'models.resnet18()':
+    if desired_model == 'resNet18':
+        model = models.resnet18()
         num_ftrs = model.fc.in_features
         model.fc = nn.Linear(num_ftrs, num_classes)
+
+    if desired_model == 'vgg11':
+        model = models.vgg11()
+
+    if desired_model == 'mobilenet_v2':
+        model = models.mobilenet_v2()
 
     return model

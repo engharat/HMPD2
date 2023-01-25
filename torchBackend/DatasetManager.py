@@ -1,6 +1,6 @@
 from torch.utils.data import Dataset
 from torch.utils.data import DataLoader, SubsetRandomSampler
-from pandas import pd
+import pandas as pd
 from PIL import Image
 import os
 import torch
