@@ -59,11 +59,11 @@ if __name__ == "__main__":
     transform_normalize_var = configuration['transform_normalize_var']
     listofNetwork = configuration['listofNetwork']
     num_classes = configuration['num_classes']
+    channel = configuration['channel']
 
     transform = getTransformer(transform_resize, transform_crop, transform_normalize_mean, transform_normalize_var)
-    device = ("mps" if torch.backends.mps.is_available() else "cpu")
     kfold = KFold(n_splits=5, shuffle=True)
-    dataset = MicroplastDataset(dataset_path, gt_path, transform=transform)
+    dataset = MicroplastDataset(dataset_path, gt_path, transform=transform, channel = channel)
 
     for k, m in listofNetwork.items():
 
@@ -77,7 +77,7 @@ if __name__ == "__main__":
             print(f'FOLD {fold}')
 
             train_loader, validation_loader = dataLoaderGenerator(dataset, train_ids, val_ids,batch_size)
-            traintestfold = trainTest(model, device, criterion, optimizer)
+            traintestfold = trainTest(model, device, criterion, optimizer, banckmark_name, k, fold)
             traintestfold.train(train_loader, validation_loader, num_epochs)
             val_acc, conf, predictions, yGT, probs = traintestfold.check_full_accuracy(validation_loader)
 
@@ -85,7 +85,7 @@ if __name__ == "__main__":
             yGT = [tensor.item() for tensor in yGT]
             predictions = [tensor.item() for tensor in predictions]
 
-            current_data = {'fold': fold, 'gt': yGT, 'predictions':predictions, 'probsClass1': probs_1}
+            current_data = {'fold': fold, 'gt': yGT, 'predictions': predictions, 'probsClass1': probs_1}
 
             reportData.append(current_data)
 

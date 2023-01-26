@@ -42,5 +42,12 @@ python report.py --name newtest
 
 ## Inference
 
-to be done
+Banckmark automatically save the models for each fold. Such models can be easly used for inference.
+```
+ python predict.py --model ./trainedModels/resNet18.pt --image ./imges/img.bmp
+```
+
+## Statistics
+Return the statistics in terms of images dimension for a given subset provided with the groundtruth.
+
 
