@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve
 from sklearn.metrics import RocCurveDisplay, roc_curve, roc_auc_score
+from sklearn.metrics import precision_score, f1_score, recall_score
 from glob import glob
 import json
 import argparse
@@ -12,12 +13,13 @@ class reporter():
     def __init__(self, experiment):
         self.folder = f"./tests/{experiment}"
         files = glob(f"{self.folder}/*.json")
+        files.sort()
         self.networks = dict([(f.split('/')[-1][0:-5], f) for f in files])
 
     def checkAccuracy(self, predictions, yGT):
         num_correct = 0
         num_samples = 0
-        num_correct = sum(a == b for a,b in zip(predictions, yGT))
+        num_correct = sum(a == b for a, b in zip(predictions, yGT))
         num_samples = len(predictions)
 
         #accuracy
@@ -41,7 +43,7 @@ class reporter():
                 probs_1.extend(d['probsClass1'])
                 predictions.extend(d['predictions'])
             self.plot_sklearn_roc_curve(yGT, probs_1, n)
-            resutls[n] = self.checkAccuracy(predictions, yGT)
+            resutls[n] = {"acc": self.checkAccuracy(predictions, yGT), "recall": recall_score(yGT, predictions, average='binary'), "precision": precision_score(yGT, predictions, average='binary'), "f1": f1_score(yGT, predictions, average='binary')}
             prob_1_allNetwork.append(probs_1)
             all_network_names.append(n)
             all_yGT.append(yGT)
@@ -67,7 +69,7 @@ class reporter():
         plt.ylabel("True Positive Rate")
         plt.title(f"{network} \nReceiver Operating Characteristic")
         plt.legend()
-        plt.savefig(f"{self.folder}/{network}")
+        plt.savefig(f"{self.folder}/{network}", dpi=400)
 
     def overall_roc_curve(self, list_of_y_real, list_of_y_prob_1, networks):
 
@@ -81,9 +83,11 @@ class reporter():
         plt.axis("square")
         plt.xlabel("False Positive Rate")
         plt.ylabel("True Positive Rate")
-        plt.title(f"Overall ROC \nReceiver Operating Characteristic")
+        #plt.title(f"Overall ROC \nReceiver Operating Characteristic")
+        #h, l = plt.gca().get_legend_handles_labels()
+        #res = [h[i[0]] for i in sorted(enumerate(l), key=lambda x: x[1])]
         plt.legend()
-        plt.savefig(f"{self.folder}/totalROC")
+        plt.savefig(f"{self.folder}/totalROC", dpi=400)
 
 
 if __name__ == "__main__":

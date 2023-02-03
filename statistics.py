@@ -34,9 +34,15 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--dataset', type=str, help='dataset folder')
     parser.add_argument('--gt', type=str, help='dataset ground truth')
+    parser.add_argument('--maxrangex', type=int, help='maximum bin range')
+    parser.add_argument('--maxrangey', type=int, help='maximum y range')
     opt = parser.parse_args()
-    dataset_path = '/Users/beppe2hd/Data/Microplastiche/images'#opt.dataset
-    gt_path = './tests/balanced.csv'#opt.gt
+    dataset_path = opt.dataset
+    gt_path = opt.gt
+    maxrangex = opt.maxrangex
+    maxrangey = opt.maxrangey
+
+
 
     annotations = import_gt(dataset_path, gt_path)
 
@@ -46,10 +52,13 @@ if __name__ == "__main__":
         an_h = annotations[annotations.classes == i].heights.to_list()
         an_w = annotations[annotations.classes == i].widths.to_list()
         plt.figure(0).clf()
-        plt.hist(an, bins=30)
+        plt.hist(an, bins=100)
+        plt.xlim(xmin=0, xmax=maxrangex)
+        plt.ylim(ymin=0, ymax=maxrangey)
+        plt.grid(True)
         plt.xlabel("Patch area [pixels]")
         plt.ylabel("Occurrencies")
-        plt.title(f"Distribution of patche areas {i}")
+        #plt.title(f"Distribution of patche areas {i}")
         plt.savefig(f"./statistics/area_hist{i}")
         an = np.array(an)
         an_h = np.array(an_h)

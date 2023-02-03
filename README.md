@@ -31,6 +31,7 @@ python banckmark.py --device gpu --name newtest --config ./config/costuomConf.ya
 - *--name* It is the name of the current experiment. A subfolder with the experiment name will be created in *tests* folder and will contains all the results. (mandatory parameter)
 - *--dataset* It is the path of the dataset (mandatory parameter)
 - *--gt* It ts the path of the csv ground truth.
+- *--config* It is the path of the configuration file.
 - *--device* default is *cpu*, but *gpu* (Nvidia Cuda) or *mps* (M1 gpu) can be selected.
 
 ## Generate report
@@ -48,6 +49,6 @@ Banckmark automatically save the models for each fold. Such models can be easly 
 ```
 
 ## Statistics
-Return the statistics in terms of images dimension for a given subset provided with the groundtruth.
+The script `statistic.py` returns the statistics in terms of images dimension for a given subset provided with the groundtruth.
 
 

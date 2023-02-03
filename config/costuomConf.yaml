@@ -1,5 +1,5 @@
 num_classes: 2
-channel: 'P'
+channel: 'R'
 num_epochs: 25
 learning_rate: 0.00001
 train_CNN: False
@@ -12,6 +12,6 @@ transform_crop: [80, 80]
 transform_normalize_mean: [0.5, 0.5, 0.5]
 transform_normalize_var: [0.5, 0.5, 0.5]
 listofNetwork:
-  'resNet18': 'models.resnet18()'
-  'alexNet': 'models.alexnet()'
+  #'resNet18': 'models.resnet18()'
+  #'alexNet': 'models.alexnet()'
   'vgg11': 'models.vgg11()'
