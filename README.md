@@ -1,10 +1,37 @@
-# microplasticDBbaseLine
+# HDMP
 
-This repository privide a Pytorch based tool fo
+HMPD is a large sized dataset of microplastic/non-microplastic images retrieved by the analysis pipeline in figure below and labeled by and experts. 
+The employed water sample comes from an aliquot of wastewater from a washing test of polyester textiles in a commercial washing machine.
+
+
+![pipeline](./images/pipeline.png "Processing Pipeline")
+
+The dataset can be downloaded here: [DOWNLOAD HDMP](https://cnrsc-my.sharepoint.com/:u:/g/personal/marco_delcoco_cnr_it/EXUUUm7sZgNEn_mfV3WVt4EBLF8zDyrn42s6UbdvvG_R-w?download=1)
+
+Last Update: 12 February 2023
+
 
 ## The dataset
 
-Holo_microplastic is a dataset providing..
+The object detection process extracted 11285 objects, and for each of them, raw, amplitude and phase have
+been saved as patches. An expert operator took care of the annotation that has been performed on 3 category: microplastic (2974), non-microplastic (7490) and
+possible-microplastics (813).
+
+Two version of the dataset are provided:
+- HMPD has been made considering all the 2974 positive samples and 2974 negative samples, randomly selected among the non-microplastic (gt.csv).
+- HMPD-P includes the possible-microplastics occurrences as positive samples. It counts 3783 positive and 3783 random negative samples (gt_possible.csv). 
+
+Each sample is provided with all the three components (raw, amplitude and phase). Some examples are reported in figure below.
+
+![pipeline](./images/example0.png "Processing Pipeline")
+
+Non Microplastis patche examples (the raw show respectively raw, amplitude and phase components)
+
+![pipeline](./images/example1.png "Processing Pipeline")
+
+Microplastis patch examples (the raw show respectively raw, amplitude and phase components)
+
+# Banchmark
 
 ## Installation
 
@@ -45,7 +72,7 @@ python report.py --name newtest
 
 Banckmark automatically save the models for each fold. Such models can be easly used for inference.
 ```
- python predict.py --model ./trainedModels/resNet18.pt --image ./imges/img.bmp
+ python predict.py --model ./trainedModels/model.pt --image ./imges/img.bmp
 ```
 
 ## Statistics
