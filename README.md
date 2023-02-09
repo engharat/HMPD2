@@ -7,7 +7,6 @@ The employed water sample comes from an aliquot of wastewater from a washing tes
 ![pipeline](./images/pipeline.png "Processing Pipeline")
 
 The dataset can be downloaded here: [DOWNLOAD HDMP](https://cnrsc-my.sharepoint.com/:u:/g/personal/marco_delcoco_cnr_it/EXUUUm7sZgNEn_mfV3WVt4EBLF8zDyrn42s6UbdvvG_R-w?download=1)
-
 Last Update: 12 February 2023
 
 

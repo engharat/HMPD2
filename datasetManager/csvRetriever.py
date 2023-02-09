@@ -57,7 +57,7 @@ class graphDatabaseManager:
 
 querymanager = graphDatabaseManager('bolt://192.168.54.202:7687', 'neo4j', 'password', 'neo4j')
 patchids_annoted, classes = querymanager.getAnnoted()
-includePossible = False
+includePossible = True
 
 df = pd.DataFrame(list(zip(patchids_annoted, classes)),columns=['patchids', 'classes'])
 df = df[['patchids', 'classes']]
@@ -95,4 +95,4 @@ df = df.drop('deleteitem', axis=1)
 numOfClassMicroplast = df[df.classes == 1].count().patchids
 
 df2 = df[df.classes == 0].sample(n=numOfClassMicroplast).append(df[df.classes == 1])
-df2.to_csv(f'i_balanced{ip}.csv', index=False)
+df2.to_csv(f'gt{ip}.csv', index=False)

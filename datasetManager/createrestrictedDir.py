@@ -4,9 +4,9 @@ from tqdm import tqdm
 import os
 
 sourceFolder = "/Users/beppe2hd/Data/Microplastiche/imageswithR"
-destForlder = "/Users/beppe2hd/Data/Microplastiche/HMPD-Gen"
-df = pd.read_csv("./balanced.csv")
-dfP = pd.read_csv("./balancedPossible.csv")
+destForlder = "/Users/beppe2hd/Data/Microplastiche/HMPD-Gen/images"
+df = pd.read_csv("./gt.csv")
+dfP = pd.read_csv("./gtPossible.csv")
 
 dfTot = pd.concat([df,dfP])
 filesToCopy = dfTot.patchids.unique().tolist()
