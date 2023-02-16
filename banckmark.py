@@ -88,6 +88,7 @@ if __name__ == "__main__":
             current_data = {'fold': fold, 'gt': yGT, 'predictions': predictions, 'probsClass1': probs_1}
 
             reportData.append(current_data)
+            traintestfold.reset_weights(model)
 
         with open(f"./tests/{banckmark_name}/{k}.json", "w") as final:
             json.dump(reportData, final)
