@@ -76,8 +76,8 @@ if __name__ == "__main__":
         reportData = []
         for fold in range(5):
 
-            trainDataSet = MicroplastDataset(dataset_path, f"./staticFoldGenerator/{channel}/train_{fold}.csv", transform=transform, channel=channel)
-            testDataSet = MicroplastDataset(dataset_path, f"./staticFoldGenerator/{channel}/test_{fold}.csv", transform=transform, channel=channel)
+            trainDataSet = MicroplastDataset(dataset_path, f"{gt_path}/{channel}/train_{fold}.csv", transform=transform, channel=channel)
+            testDataSet = MicroplastDataset(dataset_path, f"{gt_path}/{channel}/test_{fold}.csv", transform=transform, channel=channel)
 
             train_loader = DataLoader(trainDataSet, batch_size=batch_size)
             validation_loader = DataLoader(testDataSet, batch_size=batch_size)
