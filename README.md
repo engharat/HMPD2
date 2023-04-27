@@ -62,7 +62,7 @@ python banckmark.py --device gpu --name newtest --config ./config/costuomConf.ya
 - *--config* It is the path of the configuration file.
 - *--device* default is *cpu*, but *gpu* (Nvidia Cuda) or *mps* (M1 gpu) can be selected.
 
-## Run a banckmark
+## Run a banckmark on static folding
 
 In order to run the banckmark with a given train/test split the `banckmark_staticFolds.py` can be used. It works like the standard `banckmark.py` previously
 introduced. The only difference is in the `--gt` parameter dat this time must be a folder containing, for each channel, 5 ground truth train and test file in the following form
