@@ -131,3 +131,5 @@ dmypy.json
 # custom
 
 ./tests
+
+bashRun.sh
