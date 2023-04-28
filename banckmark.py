@@ -62,7 +62,7 @@ if __name__ == "__main__":
     channel = configuration['channel']
 
     transform = getTransformer(transform_resize, transform_crop, transform_normalize_mean, transform_normalize_var)
-    kfold = KFold(n_splits=5, shuffle=True)
+    kfold = KFold(n_splits=5, shuffle=True, random_state=43)
     dataset = MicroplastDataset(dataset_path, gt_path, transform=transform, channel = channel)
 
     for k, m in listofNetwork.items():
@@ -76,7 +76,7 @@ if __name__ == "__main__":
         for fold, (train_ids, val_ids) in enumerate(kfold.split(dataset)):
             print(f'FOLD {fold}')
 
-            train_loader, validation_loader = dataLoaderGenerator(dataset, train_ids, val_ids,batch_size)
+            train_loader, validation_loader = dataLoaderGenerator(dataset, train_ids, val_ids, batch_size)
             traintestfold = trainTest(model, device, criterion, optimizer, banckmark_name, k, fold)
             traintestfold.train(train_loader, validation_loader, num_epochs)
             val_acc, conf, predictions, yGT, probs = traintestfold.check_full_accuracy(validation_loader)

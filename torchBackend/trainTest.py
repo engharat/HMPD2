@@ -3,13 +3,14 @@ from tqdm import tqdm
 
 class trainTest():
 
-    def __init__(self, model, device, criterion, optimizer, banckmark_name, network, fold):
+    def __init__(self, model, device, criterion, optimizer, banckmark_name, network, fold, save = False):
         self.model = model
         self.device = device
         self.criterion = criterion
         self.optimizer = optimizer
         self.path = f"./tests/{banckmark_name}/{network}_{fold}"
         self.network = network
+        self.save = save
 
 
     def check_accuracy(self, loader, model):
@@ -85,8 +86,9 @@ class trainTest():
                 loop.set_postfix(loss = loss.item())
 
         #torch.save(self.model, self.path)
-        model_scripted = torch.jit.script(self.model)  # Export to TorchScript
-        model_scripted.save(f'{self.path}.pt')  # Save
+        if self.save:
+            model_scripted = torch.jit.script(self.model)  # Export to TorchScript
+            model_scripted.save(f'{self.path}.pt')  # Save
         #val_acc, conf, predictions, yGT, probs = self.check_full_accuracy(validation_loader, self.model)
         #self.model.train()
         #return bestAcc#, conf, predictions, yGT, probs
