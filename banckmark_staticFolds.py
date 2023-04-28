@@ -79,8 +79,8 @@ if __name__ == "__main__":
             trainDataSet = MicroplastDataset(dataset_path, f"{gt_path}/train_{fold}.csv", transform=transform, channel=channel)
             testDataSet = MicroplastDataset(dataset_path, f"{gt_path}/test_{fold}.csv", transform=transform, channel=channel)
 
-            train_loader = DataLoader(trainDataSet, batch_size=batch_size)
-            validation_loader = DataLoader(testDataSet, batch_size=batch_size)
+            train_loader = DataLoader(trainDataSet, batch_size=batch_size, shuffle=True)
+            validation_loader = DataLoader(testDataSet, batch_size=batch_size, shuffle=True)
 
             print(f'FOLD {fold}')
 
