@@ -6,8 +6,8 @@ The employed water sample comes from an aliquot of wastewater from a washing tes
 
 ![pipeline](./images/pipeline.png "Processing Pipeline")
 
-The dataset can be downloaded here: [DOWNLOAD HDMP](https://cnrsc-my.sharepoint.com/:u:/g/personal/marco_delcoco_cnr_it/ES1QHea7vIlFpUC8Ev9qsnIBU5bi7VX1VF_S1HBR5pgriw?e=k2iByS?download=1)
-Last Update: 28 April 2023
+The dataset can be downloaded here: [DOWNLOAD HDMP](https://cnrsc-my.sharepoint.com/:u:/g/personal/marco_delcoco_cnr_it/Ed_vtJKpJ7xBtQBzQ8sjEgABjg8RbYHoQxzxzlCoqiy9JA?e=siQehx?download=1)
+Last Update: 2 May 2023
 
 
 ## The dataset
@@ -65,30 +65,23 @@ python banckmark.py --device gpu --name newtest --config ./config/costuomConf.ya
 ## Run a banckmark on static folding
 
 In order to run the banckmark with a given train/test split the `banckmark_staticFolds.py` can be used. It works like the standard `banckmark.py` previously
-introduced. The only difference is in the `--gt` parameter dat this time must be a folder containing, for each channel, 5 ground truth train and test file in the following form
+introduced. The only difference is in the `--gt` parameter dat this time must be a folder containing, 5 ground truth train and test file in the following form
 ```
 ├── GT
-│   ├── A
-│   │   ├── train_0.csv
-│   │   ├── test_0.csv
-│   │   ├── ...
-│   │   ├── train_4.csv
-│   │   ├── test_4.csv
-│   ├── P
-│   │   ├── train_0.csv
-│   │   ├── test_0.csv
-│   │   ├── ...
-│   │   ├── train_4.csv
-│   │   ├── test_4.csv
-│   ├── R
-│   │   ├── ...
-│
-├── GT_P
-│   ├── A
-│   │   ├── train_0.csv
-│   │   ├── test_0.csv
-│   │   ├── ...
-│   │   ...
+│   ├── train_0.csv
+│   ├── test_0.csv
+│   ├── ...
+│   ├── train_4.csv
+│   ├── test_4.csv
+
+├── GTpossible
+│   ├── train_0.csv
+│   ├── test_0.csv
+│   ├── ...
+│   ├── train_4.csv
+│   ├── test_4.csv
+
+
 ```
 The processing can be run with the following command. The `--gt` will be provided for example with the path to the folder `GT`
 ```
@@ -97,9 +90,10 @@ python banckmark_staticFolds.py --device gpu --name newtest --config ./config/co
 
 ## Generate report
 `report.py` allows to generate a report of the run banckmarks. It will returns ROC curves plots and accuracy of each network.
+You have to create a folder, let say `<newtest>` and move insede the json file generate in the benchmark phase and finally run
 
 ```
-python report.py --name newtest 
+python report.py --name <newtest> 
 ```
 
 
