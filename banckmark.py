@@ -22,6 +22,8 @@ if __name__ == "__main__":
     parser.add_argument('--dataset', type=str, help='dataset folder')
     parser.add_argument('--gt', type=str, help='dataset ground truth')
     parser.add_argument('--device', type=str, default='cpu', help='device option are: cpu, gpu, mps' )
+    parser.add_argument('--save', type=str, default='False', help='If tru enable the model saving')
+
     opt = parser.parse_args()
     config_file = opt.config
     banckmark_name = opt.name
@@ -77,7 +79,7 @@ if __name__ == "__main__":
             print(f'FOLD {fold}')
 
             train_loader, validation_loader = dataLoaderGenerator(dataset, train_ids, val_ids, batch_size)
-            traintestfold = trainTest(model, device, criterion, optimizer, banckmark_name, k, fold)
+            traintestfold = trainTest(model, device, criterion, optimizer, banckmark_name, k, fold, save = opt.save)
             traintestfold.train(train_loader, validation_loader, num_epochs)
             val_acc, conf, predictions, yGT, probs = traintestfold.check_full_accuracy(validation_loader)
 

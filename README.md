@@ -30,7 +30,7 @@ Non Microplastis patche examples (the raw show respectively raw, amplitude and p
 
 Microplastis patch examples (the raw show respectively raw, amplitude and phase components)
 
-In order to enable fairest comparison betwen methodologies we provided a static folding split that can be found in the  `staticFoldGenerator` folder.
+In order to enable fairest comparison between methodologies we provided a static folding split that can be found in the  `staticFoldGenerator` folder.
 
 # Banchmark
 
@@ -61,6 +61,7 @@ python banckmark.py --device gpu --name newtest --config ./config/costuomConf.ya
 - *--gt* It ts the path of the csv ground truth.
 - *--config* It is the path of the configuration file.
 - *--device* default is *cpu*, but *gpu* (Nvidia Cuda) or *mps* (M1 gpu) can be selected.
+- *--save* if True enables the saving of the model (default value = False)
 
 ## Run a banckmark on static folding
 
