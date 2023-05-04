@@ -79,9 +79,9 @@ class trainTest():
                 labels = labels.to(self.device)
                 outputs = self.model(imgs)
                 loss = self.criterion(outputs, labels)
-                self.optimizer.zero_grad()
                 loss.backward()
                 self.optimizer.step()
+                self.optimizer.zero_grad()
                 loop.set_description(f"Epoch [{epoch}/{num_epochs}]")
                 loop.set_postfix(loss = loss.item())
 
