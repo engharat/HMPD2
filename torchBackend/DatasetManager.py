@@ -22,12 +22,12 @@ class MicroplastDataset(Dataset):
         self.annotations = pd.read_csv(annotation_file)
         self.transform = transform
         self.channel = channel
-
+        #import pdb; pdb.set_trace()
     def __len__(self):
         return len(self.annotations)
 
     def __getitem__(self, index):
-        img_id = f"{self.annotations.iloc[index, 0]}_{self.channel}.bmp"
+        img_id = f"{self.annotations.iloc[index, 0]}_{self.channel}.bmp" if self.channel==('P'or'A'or'R') else f"{self.annotations.iloc[index, 0]}_{self.channel}.png"
         img = Image.open(os.path.join(self.root_dir, img_id)).convert("RGB")
         y_label = torch.tensor(int(self.annotations.iloc[index, 1]))
 
