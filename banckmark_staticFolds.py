@@ -16,7 +16,7 @@ from torchBackend.DatasetManager import MicroplastDataset
 from torchBackend.DatasetManager import dataLoaderGenerator
 from torchBackend.trainTest import trainTest
 import logging
-
+torch.backend.cudnn.benchmark =  True
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
